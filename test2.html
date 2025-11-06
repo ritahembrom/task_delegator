@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Work Calendar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+  <div class="max-w-6xl mx-auto bg-white rounded-lg shadow p-6">
+    <div class="flex justify-between items-center border-b pb-3 mb-4">
+      <h2 class="text-lg font-semibold text-gray-800">Add Work Calendar</h2>
+      <button class="text-gray-500 hover:text-gray-700">&times;</button>
+    </div>
+
+    <!-- Define Weekend -->
+    <div class="mb-4">
+      <label class="inline-flex items-center space-x-2">
+        <input id="halfDayCheckbox" type="checkbox" class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+        <span class="text-gray-700 text-sm font-medium">Half working day & half weekend</span>
+      </label>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="bg-gray-100 text-gray-700">
+            <th class="p-2 text-left font-medium">Day</th>
+            <th class="p-2 text-center font-medium">All</th>
+            <th class="p-2 text-center font-medium">1st</th>
+            <th class="p-2 text-center font-medium">2nd</th>
+            <th class="p-2 text-center font-medium">3rd</th>
+            <th class="p-2 text-center font-medium">4th</th>
+            <th class="p-2 text-center font-medium">5th</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <!-- Repeat this row for each day -->
+          <script>
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            document.addEventListener("DOMContentLoaded", () => {
+              const tbody = document.querySelector("tbody");
+              days.forEach(day => {
+                const row = document.createElement("tr");
+                row.classList.add("border-b", "hover:bg-gray-50");
+
+                // Day label
+                const dayCell = document.createElement("td");
+                dayCell.classList.add("p-2", "font-medium");
+                dayCell.textContent = day;
+                row.appendChild(dayCell);
+
+                // Columns (All + 1st–5th)
+                for (let i = 0; i < 6; i++) {
+                  const td = document.createElement("td");
+                  td.classList.add("p-2", "text-center");
+                  td.innerHTML = `
+                    <div class="flex items-center justify-center space-x-2">
+                      <input type="checkbox" class="day-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded">
+                      <select class="halfday-dropdown hidden border border-gray-300 rounded text-sm px-1 py-0.5 focus:ring-2 focus:ring-blue-500">
+                        <option value="Full Day">Full Day</option>
+                        <option value="1st Half">1st Half</option>
+                        <option value="2nd Half">2nd Half</option>
+                      </select>
+                    </div>
+                  `;
+                  row.appendChild(td);
+                }
+
+                tbody.appendChild(row);
+              });
+            });
+          </script>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-end space-x-3 mt-6">
+      <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+      <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300">Cancel</button>
+    </div>
+  </div>
+
+  <script>
+    // Toggle dropdown visibility based on checkbox
+    const halfDayCheckbox = document.getElementById("halfDayCheckbox");
+    halfDayCheckbox.addEventListener("change", function () {
+      const dropdowns = document.querySelectorAll(".halfday-dropdown");
+      dropdowns.forEach(dropdown => {
+        dropdown.classList.toggle("hidden", !this.checked);
+      });
+    });
+  </script>
+
+</body>
+</html>
