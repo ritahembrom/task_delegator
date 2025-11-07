@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR Email Response Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>HR Candidate Email Response Tool</h2>
+    <form id="emailForm">
+      <label>Candidate Name:</label>
+      <input type="text" id="name" required><p>
+
+      <label>Email:</label>
+      <input type="email" id="email" required><p>
+
+      <label>Position:</label>
+      <input type="text" id="position" required><p>
+
+      <label>Status:</label>
+      <div class="radio-group">
+        <label><input type="radio" name="status" value="selected" required> Selected</label>
+        <label><input type="radio" name="status" value="rejected" required> Rejected</label>
+      </div>
+
+      <button type="button" id="previewBtn">Preview</button>
+      <button type="submit">Send Email</button>
+    </form>
+
+    <div id="previewBox" class="hidden">
+      <h3>Email Preview</h3>
+      <pre id="previewContent"></pre>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
